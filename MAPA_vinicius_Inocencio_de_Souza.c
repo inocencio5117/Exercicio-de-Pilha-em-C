@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-typedef struct NODE{
+typedef struct {
 	int data;
 	NODE* next;
 }NODE;
 
-typedef struct STACK{
+typedef struct {
 	NODE* top;
 } STACK;
 
@@ -20,9 +21,9 @@ void print(NODE* ptr){
 	}
 }
 
-void push(){
+void push(int element){
 	NODE* ptr = (NODE *) malloc(sizeof(NODE));
-	ptr->data = rand()%100;
+	ptr->data = element;
 	ptr->next = p->top;
 	p->top = ptr;
 }
@@ -39,8 +40,16 @@ int pop(){
 	}
 }
 
+#define PLATES_NUMB 5
+// pratos -> (1) Vermelho, (2) Verde, (3) Azul, (4) Branco e (5) Laranja
+char *plates[PLATES_NUMB] = {"Vermelho", "Verde", "Azul", "Branco", "Laranja"};
+
 int main() {
   // passo 1 -> Preencher uma pilha com os cinco pratos citados acima;
+  for (int i = 0; i < PLATES_NUMB; ++i) {
+    printf("%s\n", plates[i]);
+    push(i);
+  }
 
   // passo 2 ->  Imprimir a pilha na ordem em que os elementos foram inseridos (iniciando pela base, e finalizando pelo top);
 
