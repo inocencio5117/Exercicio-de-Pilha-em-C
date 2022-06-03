@@ -4,10 +4,9 @@
 
 #define NUM_PLATES 5
 
-struct stack
-{
+struct stack {
    int data;
-   struct stack *ptr; //pointer type of stack
+   struct stack *ptr;
 };
 
 typedef struct stack Stack;
@@ -16,58 +15,48 @@ typedef Stack *stackPtr;
 void push( stackPtr *top, int x ) {
     stackPtr nodePtr;
 
-    //allocating memory
     nodePtr = malloc(sizeof(Stack));
-
-    //pushing value at the top of stack only if there is space
+  
     if(nodePtr != NULL) {
        nodePtr -> data = x;
        nodePtr -> ptr = *top;
        *top = nodePtr;
     }
 
-    else
-       printf("\nERROR !!! (Not enough space)");
+    else printf("\nERROR !!! (Not enough space)");
 }
 
-int pop(stackPtr *top)
-{
-   int pValue; //variable for value at the top
-   stackPtr tempPtr; //temporary pointer
+int pop(stackPtr *top) {
+   int pValue;
+   stackPtr tempPtr;
 
    tempPtr = *top;
    pValue = (*top) -> data;
    *top = (*top) -> ptr;
-   free(tempPtr); //free temporary pointer value
+   free(tempPtr);
    return pValue;
 }
 
 void printValue(stackPtr showPtr) {
+    // pratos -> (1) Vermelho, (2) Verde, (3) Azul, (4) Branco e (5) Laranja
+    char *platesArray[NUM_PLATES] = { "Vermelho", "Verde", "Azul", "Branco", "Laranja" };
+
    if(showPtr == NULL) {
        printf("\nNo value found.");
    }
-   else {
-      printf("\nData stored in stack:\n");
 
+   else {
+     printf("\nNULL ");
       while(showPtr != NULL) {
-         printf("%d --> ", showPtr -> data);
+         printf("<-- (%d) %s ", showPtr -> data +1, platesArray[showPtr -> data]);
          showPtr = showPtr -> ptr;
      }
-     printf("NULL\n");
    }
 }
 
-int checkEmpty(stackPtr top)
-{
+int checkEmpty(stackPtr top) {
    return top == NULL;
 }
-
-// pratos -> (1) Vermelho, (2) Verde, (3) Azul, (4) Branco e (5) Laranja
-char *arr3[NUM_PLATES] = { "Vermelho",
-                            "Verde",
-                            "Azul",
-                            "Branco",
-                            "Laranja" };
 
 int main() {
   // passo 1 -> Preencher uma pilha com os cinco pratos citados acima;
@@ -78,6 +67,7 @@ int main() {
   }
 
   // passo 2 ->  Imprimir a pilha na ordem em que os elementos foram inseridos (iniciando pela base, e finalizando pelo top);
+  printf("\nResult:\n");
   printValue(stackNewPtr);
 
   // passo 3 -> Desempilhar todos os elementos, inserindo-os em uma segunda estrutura de datas do tipo pilha.
@@ -85,14 +75,13 @@ int main() {
 
   for (int i = NUM_PLATES; i > 0; --i) {
     if (!checkEmpty(stackNewPtr)) {
-      int popedValue = pop(&stackNewPtr);
-      printf("\nPopped Value: %d\n", popedValue);
-      push(&secondStackPtr, popedValue);
+      int poppedValue = pop(&stackNewPtr);
+      push(&secondStackPtr, poppedValue);
     }
   }
   
   // passo 4 -> Imprimir a nova pilha na ordem em que os elementos foram inseridos (iniciando pela base, e finalizando pelo top).
-
   printf("\nNew stack:\n");
   printValue(secondStackPtr);
 }
+
