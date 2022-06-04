@@ -59,6 +59,10 @@ int checkEmpty(stackPtr top) {
 }
 
 int main() {
+  printf("\n------------------------------------------------------\n");
+  printf("| Aluno: Vinicius Inocêncio de Souza | RA: 210298575 |\n");
+  printf("------------------------------------------------------\n");
+
   // passo 1 -> Preencher uma pilha com os cinco pratos citados acima;
   stackPtr stackNewPtr = NULL;
 
@@ -68,6 +72,8 @@ int main() {
 
   // passo 2 ->  Imprimir a pilha na ordem em que os elementos foram inseridos (iniciando pela base, e finalizando pelo top);
   printf("\nResult:\n");
+
+  printf("\nInitial stack:\n");
   printValue(stackNewPtr);
 
   // passo 3 -> Desempilhar todos os elementos, inserindo-os em uma segunda estrutura de datas do tipo pilha.
@@ -81,7 +87,7 @@ int main() {
   }
   
   // passo 4 -> Imprimir a nova pilha na ordem em que os elementos foram inseridos (iniciando pela base, e finalizando pelo top).
-  printf("\nNew stack:\n");
+  printf("\n\nNew stack:\n");
   printValue(secondStackPtr);
 }
 
